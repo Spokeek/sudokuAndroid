@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SelectionGrilleActivity" />
+        <activity android:name=".SelectionNiveauActivity" />
+        <activity android:name=".GrilleActivity"></activity>
     </application>
 
 </manifest>
