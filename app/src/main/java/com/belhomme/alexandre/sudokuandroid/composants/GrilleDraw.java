@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.belhomme.alexandre.sudokuandroid.objects.Cellule;
 import com.belhomme.alexandre.sudokuandroid.objects.Grille;
 
 public class GrilleDraw extends View implements View.OnTouchListener {
@@ -16,14 +17,18 @@ public class GrilleDraw extends View implements View.OnTouchListener {
     private Grille grille;
     public int fontColor;
     public int gridColor;
-    private int nombreEncours;
+
+    private Cellule celluleEnDeplacement;
+
+    private DrawableGrille topGrille;
+    private DrawableGrille bottomGrille;
 
     public GrilleDraw(Context context, AttributeSet attcellWidth) {
         super(context, attcellWidth);
+        setOnTouchListener(this);
         this.gridColor = Color.BLACK;
         this.fontColor = Color.WHITE;
-        this.nombreEncours = 0;
-
+        this.celluleEnDeplacement = null;
     }
 
     public void setGrille(Grille grille) {
@@ -35,18 +40,19 @@ public class GrilleDraw extends View implements View.OnTouchListener {
         Paint paintGrid = new Paint();
         Paint paintText = new Paint();
 
+        final float cellBorder = 4;
         paintText.setTextSize(16 * getResources().getDisplayMetrics().density);
-        final float cellBorder = 4; // rectBorder
-        final float canvasWidth = canvas.getWidth();
-        final float canvasHeight = canvas.getHeight();
 
         paintText.setColor(this.fontColor);
         paintGrid.setColor(this.gridColor);
         paintGrid.setStyle(Paint.Style.STROKE);
         paintGrid.setStrokeWidth(cellBorder);
 
-        DrawableGrille topGrille = new DrawableGrille(canvasWidth, canvasHeight, 9, cellBorder, 0);
-        DrawableGrille bottomGrille = new DrawableGrille(canvasWidth, canvasHeight, 3, cellBorder, topGrille.getGrilleSize() + 3 * cellBorder);
+        float canvasWidth = canvas.getWidth();
+        float canvasHeight = canvas.getHeight();
+
+        topGrille = topGrille != null ? topGrille : new DrawableGrille(canvasWidth, canvasHeight, 9, cellBorder, 0);
+        bottomGrille = bottomGrille != null ? bottomGrille : new DrawableGrille(canvasWidth, canvasHeight, 3, cellBorder, topGrille.getGrilleSize() + 3 * cellBorder);
 
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
@@ -69,6 +75,12 @@ public class GrilleDraw extends View implements View.OnTouchListener {
                 canvas.drawText(str, bottomGrille.getXposition(x) + r.width(), bottomGrille.getYposition(y + 1) - cellBorder - r.height(), paintText);
             }
         }
+
+        if (celluleEnDeplacement != null) {
+            Paint paintMouvement = new Paint();
+            paintMouvement.setColor(Color.GREEN);
+            canvas.drawRect(celluleEnDeplacement.getX(), celluleEnDeplacement.getY(), celluleEnDeplacement.getX() + 100, celluleEnDeplacement.getY() + 100, paintMouvement);
+        }
     }
 
 
@@ -76,24 +88,27 @@ public class GrilleDraw extends View implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         float x = (float) event.getX();
         float y = (float) event.getY();
+
+        Rect positionSurGrille = topGrille.getCursorPosition(x, y);
+        Rect positionSurNombres = bottomGrille.getCursorPosition(x, y);
+
         switch (event.getAction()) {
-            /*case MotionEvent.ACTION_DOWN:
-                cercles.add(new Cercle(x, y, 50));
+            case MotionEvent.ACTION_UP:
+                celluleEnDeplacement = null;
                 break;
             case MotionEvent.ACTION_MOVE:
-                Cercle c = cercles.getLast();
-                c.rayon = (int) Math.sqrt(Math.pow(x - c.x, 2) + Math.pow(y - c.y, 2));
-                break;*/
+                celluleEnDeplacement = new Cellule((int) x, (int) y, 5);
+                break;
         }
         this.invalidate();
         return true;
     }
+
 }
 
 class DrawableGrille {
     private float cellSizeWithoutBorder;
     private float borderAroundCells;
-    private float numberOfCells;
     private float widthMargin;
     private float heightM;
     private float grilleSize;
@@ -117,14 +132,6 @@ class DrawableGrille {
     }
 
 
-    public float getCellSizeWithoutBorder() {
-        return cellSizeWithoutBorder;
-    }
-
-    public float getNumberOfCells() {
-        return numberOfCells;
-    }
-
     public float getXposition(float x) {
         return widthMargin + x * (cellSizeWithoutBorder + borderAroundCells) + borderAroundCells;
     }
@@ -138,5 +145,7 @@ class DrawableGrille {
         return new Rect(0, 0, (int) (cellSizeWithoutBorder - 1.5 * r.width()) / 2, (int) (cellSizeWithoutBorder - r.height()) / 2);
     }
 
-
+    public Rect getCursorPosition(float positionX, float positionY) {
+        for()
+    }
 }
