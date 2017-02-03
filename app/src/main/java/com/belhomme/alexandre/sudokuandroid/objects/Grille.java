@@ -11,6 +11,10 @@ public class Grille implements Parcelable {
 
     private ArrayList<Cellule> grille;
 
+    public Grille() {
+        this.grille = new ArrayList<Cellule>();
+    }
+
     public Grille(String id, ArrayList<Cellule> grille) {
         this.id = id;
         this.grille = grille;
@@ -21,6 +25,25 @@ public class Grille implements Parcelable {
         this.grille = in.readArrayList(Cellule.class.getClassLoader());
     }
 
+    public boolean add(Cellule newCellule) {
+        for (Cellule c : this.grille) {
+            if (c.getX() == newCellule.getX() && c.getY() == newCellule.getY())
+                return false;
+        }
+        this.grille.add(newCellule);
+        return true;
+    }
+
+    public Cellule find(int x, int y) {
+        Cellule cellule = null;
+        for (Cellule c : this.grille) {
+            if (c.getX() == x && c.getY() == y) {
+                cellule = c;
+                break;
+            }
+        }
+        return cellule;
+    }
 
     @Override
     public int describeContents() {

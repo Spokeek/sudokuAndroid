@@ -1,11 +1,12 @@
 package com.belhomme.alexandre.sudokuandroid;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.belhomme.alexandre.sudokuandroid.composants.BaseAppCompatActivity;
 import com.belhomme.alexandre.sudokuandroid.composants.GrilleDraw;
+import com.belhomme.alexandre.sudokuandroid.objects.Cellule;
+import com.belhomme.alexandre.sudokuandroid.objects.Grille;
 
 public class GrilleActivity extends BaseAppCompatActivity {
     private long id;
@@ -22,6 +23,17 @@ public class GrilleActivity extends BaseAppCompatActivity {
 
         Bundle objetbunble = this.getIntent().getExtras();
         this.id = objetbunble.getLong("id");
+
+        Grille g = new Grille();
+        for (int y = 0; y < 9; y++) {
+            for (int x = 0; x < 9; x++) {
+                if (x == y)
+                    g.add(new Cellule(x, y, x + 1));
+                else
+                    g.add(new Cellule(x, y));
+            }
+        }
+        this.grille_draw.setGrille(g);
         this.id_grille.setText("" + this.id);
     }
 

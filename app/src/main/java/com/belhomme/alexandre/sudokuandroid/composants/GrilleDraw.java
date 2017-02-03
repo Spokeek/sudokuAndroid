@@ -16,11 +16,14 @@ public class GrilleDraw extends View implements View.OnTouchListener {
     private Grille grille;
     public int fontColor;
     public int gridColor;
+    private int nombreEncours;
 
     public GrilleDraw(Context context, AttributeSet attcellWidth) {
         super(context, attcellWidth);
         this.gridColor = Color.BLACK;
         this.fontColor = Color.WHITE;
+        this.nombreEncours = 0;
+
     }
 
     public void setGrille(Grille grille) {
@@ -47,16 +50,20 @@ public class GrilleDraw extends View implements View.OnTouchListener {
 
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
-                String str = "" + (x + 1);
-                Rect r = topGrille.getTextAjust(str, paintText);
                 canvas.drawRect(topGrille.getXposition(x), topGrille.getYposition(y), topGrille.getXposition(x + 1), topGrille.getYposition(y + 1), paintGrid);
-                canvas.drawText(str, topGrille.getXposition(x) + r.width(), topGrille.getYposition(y + 1) - cellBorder - r.height(), paintText);
+                if (grille != null && grille.find(x, y) != null && grille.find(x, y).getValeur() != 0) {
+                    String str = "" + grille.find(x, y).getValeur();
+                    Rect r = topGrille.getTextAjust(str, paintText);
+                    canvas.drawText(str, topGrille.getXposition(x) + r.width(), topGrille.getYposition(y + 1) - cellBorder - r.height(), paintText);
+                }
             }
         }
 
+        int value = 0;
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                String str = "" + (x + 1);
+                value++;
+                String str = "" + value;
                 Rect r = bottomGrille.getTextAjust(str, paintText);
                 canvas.drawRect(bottomGrille.getXposition(x), +bottomGrille.getYposition(y), bottomGrille.getXposition(x + 1), bottomGrille.getYposition(y + 1), paintGrid);
                 canvas.drawText(str, bottomGrille.getXposition(x) + r.width(), bottomGrille.getYposition(y + 1) - cellBorder - r.height(), paintText);
@@ -69,6 +76,15 @@ public class GrilleDraw extends View implements View.OnTouchListener {
     public boolean onTouch(View v, MotionEvent event) {
         float x = (float) event.getX();
         float y = (float) event.getY();
+        switch (event.getAction()) {
+            /*case MotionEvent.ACTION_DOWN:
+                cercles.add(new Cercle(x, y, 50));
+                break;
+            case MotionEvent.ACTION_MOVE:
+                Cercle c = cercles.getLast();
+                c.rayon = (int) Math.sqrt(Math.pow(x - c.x, 2) + Math.pow(y - c.y, 2));
+                break;*/
+        }
         this.invalidate();
         return true;
     }
