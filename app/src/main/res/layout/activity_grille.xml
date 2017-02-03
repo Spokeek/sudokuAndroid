@@ -15,8 +15,8 @@
         android:text="TextView" />
 
     <view
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/grille_draw"
         class="com.belhomme.alexandre.sudokuandroid.composants.GrilleDraw"
-        android:id="@+id/grille_draw" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 </RelativeLayout>

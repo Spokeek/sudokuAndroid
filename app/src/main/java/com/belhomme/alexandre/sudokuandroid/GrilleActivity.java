@@ -1,5 +1,6 @@
 package com.belhomme.alexandre.sudokuandroid;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -22,8 +23,6 @@ public class GrilleActivity extends BaseAppCompatActivity {
         Bundle objetbunble = this.getIntent().getExtras();
         this.id = objetbunble.getLong("id");
         this.id_grille.setText("" + this.id);
-        this.grille_draw.bgColor = this.bgColor;
-        this.grille_draw.test = "coucou n° " + id;
     }
 
 }
