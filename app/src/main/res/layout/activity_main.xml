@@ -8,31 +8,30 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.belhomme.alexandre.sudokuandroid.MainActivity"
-    android:background="#2980b9">
+    tools:context="com.belhomme.alexandre.sudokuandroid.MainActivity">
 
     <Button
-        android:text="Lancer le jeu"
+        android:id="@+id/button_lancement"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:id="@+id/button_lancement"
         android:layout_below="@+id/text_acceuil"
         android:layout_centerHorizontal="true"
-        style="@style/Widget.AppCompat.Button"
+        android:layout_marginTop="82dp"
+        android:text="Lancer le jeu"
         android:textSize="22sp" />
 
     <TextView
-        android:text="Bienvenue dans le meilleur jeu de sudoku trouvable sur Android"
+        android:id="@+id/text_acceuil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:id="@+id/text_acceuil"
-        android:textAlignment="center"
-        android:lineSpacingExtra="8sp"
-        android:textStyle="normal|bold"
-        android:textColor="#f1c40f"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textSize="32sp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:lineSpacingExtra="8sp"
+        android:text="Bienvenue dans le meilleur jeu de sudoku trouvable sur Android"
+        android:textAlignment="center"
+        android:textColor="#f1c40f"
+        android:textSize="32sp"
+        android:textStyle="normal|bold" />
 </RelativeLayout>

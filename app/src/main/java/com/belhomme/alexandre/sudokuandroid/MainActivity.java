@@ -1,11 +1,12 @@
 package com.belhomme.alexandre.sudokuandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.belhomme.alexandre.sudokuandroid.composants.BaseAppCompatActivity;
+
+public class MainActivity extends BaseAppCompatActivity implements View.OnClickListener {
 
     private View boutton_lancement;
 

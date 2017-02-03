@@ -1,7 +1,6 @@
 package com.belhomme.alexandre.sudokuandroid;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,9 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.belhomme.alexandre.sudokuandroid.objects.Grille;
+import com.belhomme.alexandre.sudokuandroid.composants.BaseAppCompatActivity;
 
-public class SelectionGrilleActivity extends AppCompatActivity implements ListView.OnItemClickListener {
+public class SelectionGrilleActivity extends BaseAppCompatActivity implements ListView.OnItemClickListener {
     private int niveau;
     private ListView liste_grilles;
 
