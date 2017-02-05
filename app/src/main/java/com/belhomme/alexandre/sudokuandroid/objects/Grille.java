@@ -67,6 +67,8 @@ public class Grille implements Parcelable {
     };
 
     public boolean canAdd(Cellule cellule) {
+        if (cellule.getValeur() < 1 || cellule.getValeur() > 9)
+            return false;
         Cellule existingCell = this.find(cellule.getX(), cellule.getY());
         if (existingCell == null)
             return true;

@@ -83,9 +83,15 @@ public class GrilleDraw extends View implements View.OnTouchListener {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 value++;
+                Paint p;
+                if (this.celluleEnDeplacement != null && this.celluleEnDeplacement.getValeur() == value) {
+                    paintMouvement.setColor(Color.GREEN);
+                    p = paintMouvement;
+                } else
+                    p = paintGrid;
                 String str = "" + value;
                 Rect r = bottomGrille.getTextAjust(str, paintText);
-                canvas.drawRect(bottomGrille.getXposition(x), +bottomGrille.getYposition(y), bottomGrille.getXposition(x + 1), bottomGrille.getYposition(y + 1), paintGrid);
+                canvas.drawRect(bottomGrille.getXposition(x), +bottomGrille.getYposition(y), bottomGrille.getXposition(x + 1), bottomGrille.getYposition(y + 1), p);
                 canvas.drawText(str, bottomGrille.getXposition(x) + r.width(), bottomGrille.getYposition(y + 1) - cellBorder - r.height(), paintText);
             }
         }
@@ -111,7 +117,7 @@ public class GrilleDraw extends View implements View.OnTouchListener {
                     this.celluleEnDeplacement = new Cellule((int) x, (int) y, positionSurNombres.getValeur());
                 break;
             case MotionEvent.ACTION_UP:
-                if(this.celluleHover != null && this.grille.canAdd(this.celluleHover)){
+                if (this.celluleHover != null && this.grille.canAdd(this.celluleHover)) {
                     this.grille.add(this.celluleHover);
                 }
                 this.celluleEnDeplacement = null;
