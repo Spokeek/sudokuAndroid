@@ -25,13 +25,11 @@ public class Grille implements Parcelable {
         this.grille = in.readArrayList(Cellule.class.getClassLoader());
     }
 
-    public boolean add(Cellule newCellule) {
-        for (Cellule c : this.grille) {
-            if (c.getX() == newCellule.getX() && c.getY() == newCellule.getY())
-                return false;
-        }
+    public void add(Cellule newCellule) {
+        Cellule c = this.find(newCellule.getX(), newCellule.getY());
+        if (c != null)
+            this.grille.remove(c);
         this.grille.add(newCellule);
-        return true;
     }
 
     public Cellule find(int x, int y) {
@@ -68,4 +66,30 @@ public class Grille implements Parcelable {
         }
     };
 
+    public boolean canAdd(Cellule cellule) {
+        Cellule existingCell = this.find(cellule.getX(), cellule.getY());
+        if (existingCell == null)
+            return true;
+        else if (existingCell.isReadOnly() || existingCell.getValeur() == cellule.getValeur())
+            return false;
+        else {
+            for (int y = 0; y < 9; y++) {
+                for (int x = 0; x < 9; x++) {
+                    if (this.find(x, cellule.getY()).getValeur() == cellule.getValeur() || this.find(cellule.getX(), y).getValeur() == cellule.getValeur()) {
+                        return false;
+                    }
+                }
+            }
+            int marginY = (int) ((cellule.getY() / 3)) * 3;
+            int marginX = (int) ((cellule.getX() / 3)) * 3;
+            for (int y = marginY; y < marginY + 3; y++) {
+                for (int x = marginX; x < marginX + 3; x++) {
+                    Cellule c = this.find(x, y);
+                    if (c.getValeur() == cellule.getValeur())
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
 }

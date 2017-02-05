@@ -6,16 +6,25 @@ public class Cellule {
     private int x;
     private int y;
     private int valeur;
+    private boolean readOnly = false;
 
     public Cellule(int x, int y) {
         this.x = x;
         this.y = y;
         this.valeur = 0;
     }
-        public Cellule(int x, int y, int valeur) {
+
+    public Cellule(int x, int y, int valeur) {
         this.x = x;
         this.y = y;
         this.valeur = valeur;
+    }
+
+    public Cellule(int x, int y, int valeur, boolean readOnly) {
+        this.x = x;
+        this.y = y;
+        this.valeur = valeur;
+        this.readOnly = readOnly;
     }
 
     public int getY() {
@@ -36,5 +45,9 @@ public class Cellule {
             return true;
         } else
             return false;
+    }
+
+    public boolean isReadOnly() {
+        return readOnly;
     }
 }

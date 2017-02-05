@@ -28,7 +28,7 @@ public class GrilleActivity extends BaseAppCompatActivity {
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
                 if (x == y)
-                    g.add(new Cellule(x, y, x + 1));
+                    g.add(new Cellule(x, y, x + 1, true));
                 else
                     g.add(new Cellule(x, y));
             }
