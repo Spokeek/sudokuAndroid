@@ -22,8 +22,6 @@ public class MainActivity extends BaseAppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == this.boutton_lancement) {
             Intent intention = new Intent(this, SelectionNiveauActivity.class);
-            //final Informations infos = new Informations(nameI.getText().toString(), lNameI.getText().toString());
-            //intention.putExtra("informations", infos);
             startActivityForResult(intention, 0);
         }
     }

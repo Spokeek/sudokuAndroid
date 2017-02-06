@@ -94,4 +94,12 @@ public class Grille implements Parcelable {
         }
         return true;
     }
+
+    public boolean isCleared() {
+        for (Cellule c : this.grille) {
+            if (c.getValeur() == 0)
+                return false;
+        }
+        return true;
+    }
 }

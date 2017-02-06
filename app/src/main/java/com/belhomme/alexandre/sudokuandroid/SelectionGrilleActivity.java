@@ -49,9 +49,10 @@ public class SelectionGrilleActivity extends BaseAppCompatActivity implements Li
         this.liste_grilles.setOnItemClickListener(this);
 
 
-        //temporaire
+        String[] niveauLabels = new String[]{"faciles", "moyens", "difficiles"};
+
         TextView t = (TextView) findViewById(R.id.voir_niveau);
-        t.setText("niveau " + this.niveau);
+        t.setText("niveau " + niveauLabels[(int) this.niveau]);
 
     }
 

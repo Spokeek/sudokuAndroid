@@ -16,20 +16,20 @@
         android:text="niveau 1" />
 
     <Button
-        android:id="@+id/nv_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/nv_1"
-        android:layout_below="@+id/nv_1"
-        android:layout_marginTop="43dp"
-        android:text="Niveau 2" />
-
-    <Button
         android:id="@+id/nv_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Niveau 3"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/nv_2"
-        android:layout_below="@+id/nv_2"
-        android:layout_marginTop="59dp"
-        android:text="Niveau 3" />
+        android:layout_marginBottom="103dp" />
+
+    <Button
+        android:id="@+id/nv_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Niveau 2"
+        android:layout_above="@+id/nv_3"
+        android:layout_alignStart="@+id/nv_1"
+        android:layout_marginBottom="99dp" />
 </RelativeLayout>

@@ -57,7 +57,7 @@ public class GrilleDraw extends View implements View.OnTouchListener {
         float canvasHeight = canvas.getHeight();
 
         topGrille = topGrille != null ? topGrille : new DrawableGrille(canvasWidth, canvasHeight, 9, cellBorder, 0);
-        bottomGrille = bottomGrille != null ? bottomGrille : new DrawableGrille(canvasWidth, canvasHeight, 3, cellBorder, topGrille.getGrilleSize() + 3 * cellBorder);
+        bottomGrille = bottomGrille != null ? bottomGrille : new DrawableGrille(canvasWidth, canvasHeight, 3, cellBorder, topGrille.getGrilleSize() + 2 * cellBorder);
 
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
@@ -113,29 +113,31 @@ public class GrilleDraw extends View implements View.OnTouchListener {
         Cellule positionSurGrille = topGrille.getCursorPosition(x, y);
         Cellule positionSurNombres = bottomGrille.getCursorPosition(x, y);
 
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (positionSurNombres != null)
-                    this.celluleEnDeplacement = new Cellule((int) x, (int) y, positionSurNombres.getValeur());
-                break;
-            case MotionEvent.ACTION_UP:
-                if (this.celluleHover != null && this.grille.canAdd(this.celluleHover)) {
-                    this.grille.add(this.celluleHover);
-                }
-                this.celluleEnDeplacement = null;
-                this.celluleHover = null;
-                break;
-            case MotionEvent.ACTION_MOVE:
-                if (this.celluleEnDeplacement != null) {
-                    this.celluleEnDeplacement = new Cellule((int) x, (int) y, this.celluleEnDeplacement.getValeur());
-                    if (positionSurGrille != null) {
-                        this.celluleHover = new Cellule(positionSurGrille.getX(), positionSurGrille.getY(), celluleEnDeplacement.getValeur());
-                    } else {
-                        this.celluleHover = null;
+        if (!this.grille.isCleared()) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    if (positionSurNombres != null)
+                        this.celluleEnDeplacement = new Cellule((int) x, (int) y, positionSurNombres.getValeur());
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (this.celluleHover != null && this.grille.canAdd(this.celluleHover)) {
+                        this.grille.add(this.celluleHover);
                     }
-                }
+                    this.celluleEnDeplacement = null;
+                    this.celluleHover = null;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (this.celluleEnDeplacement != null) {
+                        this.celluleEnDeplacement = new Cellule((int) x, (int) y, this.celluleEnDeplacement.getValeur());
+                        if (positionSurGrille != null) {
+                            this.celluleHover = new Cellule(positionSurGrille.getX(), positionSurGrille.getY(), celluleEnDeplacement.getValeur());
+                        } else {
+                            this.celluleHover = null;
+                        }
+                    }
+            }
+            this.invalidate();
         }
-        this.invalidate();
         return true;
     }
 
