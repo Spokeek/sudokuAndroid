@@ -9,8 +9,6 @@ import com.belhomme.alexandre.sudokuandroid.objects.Cellule;
 import com.belhomme.alexandre.sudokuandroid.objects.Grille;
 
 public class GrilleActivity extends BaseAppCompatActivity {
-    private long id;
-    private TextView id_grille;
     private GrilleDraw grille_draw;
 
     @Override
@@ -18,23 +16,26 @@ public class GrilleActivity extends BaseAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grille);
 
-        this.id_grille = (TextView) findViewById(R.id.id_grille);
         this.grille_draw = (GrilleDraw) findViewById(R.id.grille_draw);
 
         Bundle objetbunble = this.getIntent().getExtras();
-        this.id = objetbunble.getLong("id");
+        String niveau = objetbunble.getString("niveau");
 
         Grille g = new Grille();
+        int position = 0;
         for (int y = 0; y < 9; y++) {
             for (int x = 0; x < 9; x++) {
-                if (x == y)
-                    g.add(new Cellule(x, y, x + 1, true));
-                else
-                    g.add(new Cellule(x, y));
+                int valeur;
+                try {
+                    valeur = Integer.parseInt("" + niveau.charAt(position));
+                } catch (Exception e) {
+                    valeur = 0;
+                }
+                g.add(new Cellule(x, y, valeur, valeur != 0));
+                position++;
             }
         }
         this.grille_draw.setGrille(g);
-        this.id_grille.setText("" + this.id);
     }
 
 }

@@ -65,6 +65,8 @@ public class GrilleDraw extends View implements View.OnTouchListener {
                 if (this.celluleHover != null && this.celluleHover.getX() == x && this.celluleHover.getY() == y) {
                     if (this.grille.canAdd(this.celluleHover))
                         paintMouvement.setColor(Color.GREEN);
+                    else if (this.grille.find(x, y).isReadOnly())
+                        paintMouvement.setColor(Color.GRAY);
                     else
                         paintMouvement.setColor(Color.RED);
                     p = paintMouvement;

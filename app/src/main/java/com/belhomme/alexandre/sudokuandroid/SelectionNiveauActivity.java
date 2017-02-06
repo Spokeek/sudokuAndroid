@@ -29,7 +29,6 @@ public class SelectionNiveauActivity extends BaseAppCompatActivity implements Vi
     public void onClick(View v) {
         int niveau = this.boutons_niveau.indexOf(v);
         if (niveau != -1) {
-            niveau++;
             Intent intention = new Intent(this, SelectionGrilleActivity.class);
             intention.putExtra("niveau", niveau);
             startActivityForResult(intention, 0);
